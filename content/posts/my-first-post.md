@@ -1,12 +1,12 @@
 +++
-title = "Concurrency: What It Is and Why It Matters in Modern Computing"
-date = "2024-11-24T21:31:00-03:00"
+title = "My First Blog Post: A Developer's Journey"
+date = "2024-01-24T21:31:00-03:00"
 author = "Facundo J Gonzalez"
-authorTwitter = "facujgg"
+authorTwitter = "facujgg" 
 draft = false
-tags = ["programming", "concurrency", "software-engineering", "computing"]
-keywords = ["concurrency", "parallel computing", "asynchronous programming", "modern software"]
-description = "An exploration of concurrency in modern computing, its importance, and how it shapes the software we use every day."
+tags = ["programming", "personal", "software-engineering", "introduction"]
+keywords = ["developer journey", "software development", "personal blog", "introduction"]
+description = "An introduction to my personal blog where I share my experiences and insights as a software developer."
 showFullContent = false
 readingTime = true
 hideComments = false

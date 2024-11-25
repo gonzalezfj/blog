@@ -15,7 +15,7 @@ This blog is built using [Hugo](https://gohugo.io/) and contains articles about:
 
 ## Recent Posts
 
-- [Concurrency: What It Is and Why It Matters in Modern Computing](content/posts/my-first-post.md)
+- [My First Blog Post: A Developer's Journey](content/posts/my-first-post.md)
 
 ## Local Development
 
