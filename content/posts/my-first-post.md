@@ -46,7 +46,7 @@ Here's what you'll find in this little digital garden of mine:
 
 ## Let's Connect! 🤝
 
-Whether you're here to learn, share experiences, or just enjoy some tech humor, I'm glad you stopped by. Feel free to reach out if you want to chat about development, need help with a project, or just want to debate the merits of different Docker base images (Alpine vs. Debian, anyone?).
+Whether you're here to learn, share experiences, or just enjoy some tech humor, I'm glad you stopped by. Feel free to reach out if you want to chat about development, need help with a project, or just want to debate the merits of different Docker base images (Alpine vs. Debian, anyone?). You can tweet me [@facujgg](https://twitter.com/facujgg) or send an email to `me[at]gonzalezfj.com`.
 
 Stay tuned for more posts! And remember: in software development, it's all about finding the perfect balance... kind of like my attempts at work-life balance, which mostly consists of debugging code at 3 AM while convincing myself that coffee is a food group ☕.
 
