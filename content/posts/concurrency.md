@@ -24,7 +24,7 @@ In the modern world of computing, **concurrency is everywhere**. Whether you're 
 
 ### The concurrency in the real world 🌍
 
-Imagine your are making your breakfast 🍳. You need to boil some water, make some coffee ☕, fry some eggs, and toast some bread 🍞. You could do these tasks one after the other, in order. This is similar to how **sequential programs** work - one task at a time, in order. But you can do other things while you are waiting for the water to boil, right? This is where **concurrency** comes into play. _Concurrency is about dealing with multiple tasks at the same time_.
+Imagine you are making your breakfast 🍳. You need to boil some water, make some coffee ☕, fry some eggs, and toast some bread 🍞. You could do these tasks one after the other, in order. This is similar to how **sequential programs** work - one task at a time, in order. But you can do other things while you are waiting for the water to boil, right? This is where **concurrency** comes into play. _Concurrency is about dealing with multiple tasks at the same time_.
 
 In computing, concurrency allows systems to maximize their resources and handle multiple users, processes, or requests efficiently. Without it, much of the technology we take for granted today simply wouldn't work.
 
@@ -44,9 +44,9 @@ To use our breakfast analogy: _Concurrency_ is like one person efficiently manag
 
 Rob Pike explains this distinction brilliantly in his famous talk [**Concurrency is not Parallelism**](https://www.youtube.com/watch?v=cN_DpYBzKso), which I highly recommend watching for a deeper understanding.
 
-Also there is not single definition for concurrency programming, it can be defined in different ways depending on the context and authors.
+Also there is not a single definition for concurrent programming, it can be defined in different ways depending on the context and authors.
 
-For instance, the _merriam-webster dictionary_ writes about what concurrency means:
+For instance, the _Merriam-Webster dictionary_ writes about what concurrency means:
 
 > Things that are concurrent usually not only happen at the same time but also are similar to each other. So, for example, multitasking computers are capable of performing concurrent tasks. When we take more than one medication at a time, we run the risks involved with concurrent drug use. And at any multiplex theater several movies are running concurrently.
 
