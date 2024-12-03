@@ -42,7 +42,7 @@ Even something as fundamental as the distinction between **concurrency** and **p
 
 To use our breakfast analogy: _Concurrency_ is like one person efficiently managing multiple cooking tasks by switching between them. _Parallelism_ is like having multiple cooks working on different dishes simultaneously.
 
-Rob Pike explains this distinction brilliantly in his famous talk [**Concurrency is not Parallelism**](https://www.youtube.com/watch?v=cN_DpYBzKso), which I highly recommend watching for a deeper understanding.
+Rob Pike explains this distinction brilliantly in his famous talk [**Concurrency is not Parallelism**](https://go.dev/blog/waza-talk), which I highly recommend watching for a deeper understanding.
 
 Also there is not a single definition for concurrent programming, it can be defined in different ways depending on the context and authors.
 
