@@ -10,6 +10,7 @@ description = "A beginner-friendly guide to understanding concurrency in computi
 showFullContent = false
 readingTime = true
 hideComments = false
+lastmod = "2025-01-08T02:29:00-03:00"
 +++
 
 # Learn you a concurrency for great interleaving! ⚡
