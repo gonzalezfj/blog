@@ -20,6 +20,8 @@ I want to explore **concurrency** as a separate concept from _parallel computing
 
 ## Understanding Concurrency: How computers juggle tasks 🤹‍♀️
 
+![WALL-E juggling multiple tasks](./wall-e-juggling.jpg)
+
 In the modern world of computing, **concurrency is everywhere**. Whether you're loading a web page, running applications on your phone, or working with distributed systems in the cloud, you're benefiting from the ability of systems to do multiple things at once. Yet, despite its ubiquity, concurrency remains one of the most complex topics in computer science.
 
 ### The concurrency in the real world 🌍
@@ -66,6 +68,184 @@ A computation can be understood as a sequence of states, where each state is con
 Van Roy describes concurrency as a way to model independent activities executing simultaneously. He explains that concurrent programs consist of multiple activities running at their own pace, similar to real-world processes. The key insight is that these activities should remain independent unless explicit communication is required by design. This approach mirrors how the real world works outside of the system, providing a natural way to model real-world behavior within the system.
 
 The idea is clear, **concurrency is about dealing with multiple tasks at the same time, but not necessarily executing them at the same time**. And this is the key concept that we need to understand, concurrency is not about parallelism, it enables parallelism, but it is not parallelism. Also distributed systems are a form of concurrency, but they are a different concept, and we'll talk about it later.
+
+## But why do we need concurrency? 🤔
+
+As Bryan Cantrill eloquently explains, there are three fundamental reasons why we need concurrency:
+
+### 1. Multiplexing I/O 🔄
+
+When a program performs I/O operations (like reading from disk or network), the CPU would be idle while waiting for the operation to complete. Concurrency allows us to:
+
+- Switch to other tasks while waiting
+- Handle multiple I/O operations simultaneously
+- Maximize CPU utilization
+- Improve overall system responsiveness
+
+### 2. Managing Multiple Independent Activities 🤹
+
+Many real-world systems need to handle multiple independent tasks:
+
+- Web servers handling multiple client requests
+- GUI applications responding to user inputs while processing
+- Operating systems running multiple applications
+- Real-time systems monitoring various sensors
+
+Concurrency provides a natural way to structure such programs.
+
+### 3. Taking Advantage of Parallel Hardware 💻
+
+While concurrency isn't parallelism, it enables us to:
+
+- Utilize multiple CPU cores effectively
+- Distribute work across available hardware
+- Improve performance through parallel execution
+- Scale applications as hardware resources grow
+
+These reasons highlight why concurrency isn't just a programming technique—it's a fundamental requirement for modern computing systems. Whether we're building web applications, desktop software, or distributed systems, understanding and effectively implementing concurrency is crucial for creating efficient and responsive programs.
+
+## The Challenges of Concurrent Programming: Hic Sunt Dracones 🐉
+
+> _Note: "Hic Sunt Dracones" (Latin for "Here be dragons") was a phrase used on ancient maps to mark dangerous or uncharted territories - a fitting metaphor for the challenges that await us in concurrent programming._
+
+While concurrency helps us build more efficient and responsive systems, it also introduces significant challenges that every developer needs to be aware of. Let's explore some of these challenges:
+
+### Testing and Debugging: A Detective Story 🔍
+
+Imagine you're trying to solve a murder mystery where the crime happens differently each time you investigate it. That's what debugging concurrent programs feels like! Here's why:
+
+- **Non-deterministic behavior**: The same program can produce different results on each run due to timing variations
+- **Race conditions**: These sneaky bugs only appear under specific timing conditions, making them incredibly hard to reproduce
+- **Deadlocks and livelocks**: Your program might get stuck in ways that are difficult to predict during testing
+- **Heisenberg bugs**: Like the quantum physics uncertainty principle, the very act of observing these bugs changes their behavior. Adding logging statements or using a debugger alters the timing just enough to make the issue vanish, only to reappear in production
+
+To tackle these challenges, developers rely on specialized tools and techniques:
+
+- Static analysis tools that can detect potential race conditions
+- Stress testing and chaos engineering to expose concurrency bugs
+- Careful logging and monitoring to track program behavior
+- Formal verification methods for critical systems
+
+### Coordination in Concurrent Systems 🤝
+
+The key to tackling these challenges lies in how we coordinate and share information between concurrent execution flows. When multiple parts of our program are running independently, we need reliable ways to orchestrate their interactions. Two fundamental approaches have emerged to manage this complexity:
+
+#### Shared Memory 🔄
+
+Imagine a whiteboard that multiple people can write on simultaneously. That's shared memory! While it's fast and direct, it comes with challenges:
+
+- Need for synchronization mechanisms (locks, mutexes)
+- Risk of race conditions
+- Complex coordination requirements
+- Difficulty in scaling across machines
+
+```python
+# Shared memory example (pseudo-code)
+shared_counter = 0
+lock = Lock()
+
+def increment():
+    with lock:
+        global shared_counter
+        shared_counter += 1  # Protected by lock
+
+def worker():
+    for _ in range(1000):
+        increment()
+
+threads = []
+for _ in range(5):
+    # multiple threads incrementing the shared counter
+    thread = Thread(target=worker)
+    threads.append(thread)
+    thread.start()
+
+for thread in threads:
+    thread.join()
+
+print(f"Final counter value: {shared_counter}")
+
+```
+
+#### Message Passing 📫
+
+Think of this as sending emails instead of writing on a shared whiteboard. Processes communicate by sending messages to each other:
+
+- More explicit and easier to reason about
+- Better isolation between components
+- Natural scaling to distributed systems
+- Potentially higher overhead
+
+```go
+// Message passing example (Go-like syntax)
+jobs := make(chan int, 100)    // Buffered channel for jobs
+results := make(chan int, 100) // Buffered channel for results
+
+// Producer goroutine
+go func() {
+    for i := 0; i < 100; i++ {
+        jobs <- i // Send jobs to worker
+    }
+    close(jobs) // Close channel when done producing
+}()
+
+// Consumer goroutine
+go func() {
+    for job := range jobs {
+        result := job * 2     // Do some work
+        results <- result     // Send result back
+    }
+    close(results) // Close results when done consuming
+}()
+
+// Main goroutine collects results
+for result := range results {
+    fmt.Println("Got result:", result)
+}
+```
+
+### Classic Concurrency Problems: The Dining Philosophers 🍽️
+
+No discussion about concurrency would be complete without mentioning some classic problems that highlight its challenges. The most famous is the Dining Philosophers problem, introduced by Dijkstra in 1965:
+
+Imagine five philosophers sitting at a round table, with a fork between each pair. Each philosopher needs two forks to eat. The challenge is to design a solution that:
+
+- Allows philosophers to eat without starving (liveness)
+- Prevents deadlocks where no one can eat
+- Ensures fair access to resources
+
+This problem beautifully illustrates common concurrent programming challenges:
+
+- Resource sharing and allocation
+- Deadlock prevention
+- Starvation avoidance
+- Fairness in resource distribution
+
+Solutions to this problem demonstrate different concurrent programming paradigms:
+
+- Using locks and mutexes
+- Employing semaphores
+- Implementing message passing
+- Using monitors and conditional variables
+
+```python
+# Simplified dining philosophers solution (pseudo-code)
+class DiningPhilosophers:
+    def __init__(self, n):
+        self.forks = [Lock() for _ in range(n)]
+
+    def eat(self, philosopher_id):
+        left = philosopher_id
+        right = (philosopher_id + 1) % len(self.forks)
+
+        # Prevent deadlock by ensuring consistent lock order
+        first = min(left, right)
+        second = max(left, right)
+
+        with self.forks[first], self.forks[second]:
+            # Philosopher is eating...
+            pass
+```
 
 ## What This Series Will Cover 📋
 
